@@ -9,7 +9,7 @@
     "Parameters": [
       {
         "Name": "PedidoDto",
-        "Type": "PedidosSYAC.Common.Dto.Pedidos.PedidosDto",
+        "Type": "PedidosSYAC.Common.Dto.Pedidos.PedidosCreacionDto",
         "IsRequired": true
       }
     ],
@@ -70,7 +70,7 @@
     "Parameters": [
       {
         "Name": "Identificacion",
-        "Type": "System.Int32",
+        "Type": "System.String",
         "IsRequired": true
       }
     ],
@@ -110,7 +110,7 @@
     "Parameters": [
       {
         "Name": "Identificacion",
-        "Type": "System.Int32",
+        "Type": "System.String",
         "IsRequired": true
       }
     ],

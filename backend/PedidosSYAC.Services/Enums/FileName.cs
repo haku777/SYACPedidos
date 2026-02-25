@@ -4,12 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace PedidosSYAC.Common.enums
+namespace PedidosSYAC.Services.Enums
 {
-    enum Estados
+    internal class FileName
     {
-        Registrado = 1,
-        Confirmar = 2,
-        Anular = 3
     }
 }

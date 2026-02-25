@@ -18,7 +18,7 @@ namespace PedidosSYAC.DataAccess.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Identificacion = table.Column<int>(type: "int", nullable: false),
+                    Identificacion = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Nombre = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Direccion = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
@@ -48,7 +48,7 @@ namespace PedidosSYAC.DataAccess.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Nombre = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Cantidad = table.Column<int>(type: "int", nullable: false),
-                    ValorUnitario = table.Column<int>(type: "int", nullable: false)
+                    ValorUnitario = table.Column<decimal>(type: "decimal(18,2)", precision: 18, scale: 2, nullable: false)
                 },
                 constraints: table =>
                 {
@@ -63,7 +63,7 @@ namespace PedidosSYAC.DataAccess.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Id_Cliente = table.Column<int>(type: "int", nullable: false),
                     Id_Estado = table.Column<int>(type: "int", nullable: false),
-                    ValorTotal = table.Column<int>(type: "int", nullable: false)
+                    ValorTotal = table.Column<decimal>(type: "decimal(18,2)", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -91,7 +91,7 @@ namespace PedidosSYAC.DataAccess.Migrations
                     Id_Pedido = table.Column<int>(type: "int", nullable: false),
                     Id_Producto = table.Column<int>(type: "int", nullable: false),
                     Cantidad = table.Column<int>(type: "int", nullable: false),
-                    ValorPorCantidad = table.Column<int>(type: "int", nullable: false)
+                    ValorPorCantidad = table.Column<decimal>(type: "decimal(18,2)", precision: 18, scale: 2, nullable: false)
                 },
                 constraints: table =>
                 {
@@ -111,6 +111,11 @@ namespace PedidosSYAC.DataAccess.Migrations
                 });
 
             migrationBuilder.InsertData(
+                table: "Clientes",
+                columns: new[] { "Id", "Direccion", "Identificacion", "Nombre" },
+                values: new object[] { 1, "DirSYAC", "1230000007", "Jimmy" });
+
+            migrationBuilder.InsertData(
                 table: "Estados",
                 columns: new[] { "Id", "Estado" },
                 values: new object[,]
@@ -118,6 +123,29 @@ namespace PedidosSYAC.DataAccess.Migrations
                     { 1, "Registrado" },
                     { 2, "Confirmar" },
                     { 3, "Anular" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "Productos",
+                columns: new[] { "Id", "Cantidad", "Nombre", "ValorUnitario" },
+                values: new object[,]
+                {
+                    { 1, 25, "Magnat", 50m },
+                    { 2, 25, "Code Noir", 60m }
+                });
+
+            migrationBuilder.InsertData(
+                table: "Pedidos",
+                columns: new[] { "Id", "Id_Cliente", "Id_Estado", "ValorTotal" },
+                values: new object[] { 1, 1, 1, 210m });
+
+            migrationBuilder.InsertData(
+                table: "ProductosXPedido",
+                columns: new[] { "Id", "Cantidad", "Id_Pedido", "Id_Producto", "ValorPorCantidad" },
+                values: new object[,]
+                {
+                    { 1, 2, 1, 1, 100m },
+                    { 2, 1, 1, 2, 60m }
                 });
 
             migrationBuilder.CreateIndex(

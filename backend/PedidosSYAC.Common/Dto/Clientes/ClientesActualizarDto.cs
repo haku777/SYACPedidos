@@ -10,7 +10,7 @@ namespace PedidosSYAC.Common.Dto.Clientes
     public class ClientesActualizarDto
     {
         [Required]
-        public int Identificacion { get; set; }
+        public string Identificacion { get; set; }
         public string Nombre { get; set; }
         public string Direccion { get; set; }
     }

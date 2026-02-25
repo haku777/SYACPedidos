@@ -1,18 +1,13 @@
 ﻿using AutoMapper;
 using AutoMapper.QueryableExtensions;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using PedidosSYAC.Common.Dto.Estados;
 using PedidosSYAC.Common.Dto.Pedidos;
+using PedidosSYAC.Common.Dto.Productos;
 using PedidosSYAC.DataAccess;
 using PedidosSYAC.DataAccess.Entity;
+using PedidosSYAC.Services.Interfaces;
 using PedidosSYAC.Services.Services.Interfaces;
-using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace PedidosSYAC.Services.Services
 {
@@ -20,7 +15,12 @@ namespace PedidosSYAC.Services.Services
     {
         private readonly PedidosContext _context;
         private readonly IMapper _mapper;
-        public PedidosService(PedidosContext context, IMapper mapper) { _context = context;_mapper = mapper; }
+        private readonly IClientes _clientes;
+        public PedidosService(PedidosContext context, IMapper mapper, IClientes clientes)
+        {
+            _context = context; _mapper = mapper;
+            _clientes = clientes;
+        }
 
         public async Task<List<PedidosDto>> Get() 
         { 
@@ -32,47 +32,90 @@ namespace PedidosSYAC.Services.Services
 
         public async Task<PedidosDto> AddPedido(PedidosCreacionDto PedidoCreacion) 
         {
-            var hayProductos = PedidoCreacion.Productos.Select(p => p.Id).ToList();
-            //var hayProductos = _context.Productos.Where(x => x.Cantidad <= PedidoCreacion.Producto);
-            
-            var productosDb = await _context.Productos.Where(p => hayProductos.Contains(p.Id)).ToListAsync();
+            //validacion de stock mediante front en el producto a seleccionar
+            var cliente = await _context.Clientes.Where(c=>c.Identificacion==PedidoCreacion.IndentificacionCliente).FirstOrDefaultAsync();
+            if (cliente is null) throw new Exception("no existe cliente con esa identificacion");
 
-            var sinStock = PedidoCreacion.Productos.Where(p =>
-                productosDb.Any(db => db.Id == p.Id && db.Cantidad < p.Cantidad)
-            ).ToList();
+            //ValorTotal pedido
+            var valorTotal = ValorTotalPedido(PedidoCreacion.ListaIdProductos);
 
-
-
-            if (sinStock.Any())
+            var pedido = new Pedidos()
             {
-                throw new Exception("Algunos productos no tienen stock suficiente.");
+                Id_Cliente = cliente.Id,
+                Id_Estado = (int)Enums.Estados.Registrado,
+                ValorTotal = valorTotal
+            };
+            var nuevoPedido = _context.Pedidos.Add(pedido);
+            _context.SaveChanges();
+
+            //calcular producto por cantidad PedidoCreacion.Productos (cantidad x valor unitario)
+            //por cada producto agregamos el registro y sus valores por producto cantidad y valor para pedido
+            var productosAgregar = new List<ProductosXPedido>();
+
+            foreach (var item in PedidoCreacion.ListaIdProductos)
+            {
+                var valorUnitarioProducto = _context.Productos.FirstOrDefault(p => p.Id == item.IdProducto);
+                productosAgregar.Add(new ProductosXPedido
+                    {
+                        Id_Pedido = pedido.Id,
+                        Id_Producto = item.IdProducto,
+                        Cantidad = item.Cantidad,
+                        ValorPorCantidad = valorUnitarioProducto.ValorUnitario * item.Cantidad
+                    }
+                );
             }
-            var falta = new PedidosDto();
-            return falta;
 
-            //validar stock de productos, actualizar productos tambien stock
-            //pedido
-            //    cliente identification? o id?
-            //    estado = 1
-            //    valorTotal = porCada producto x valor unitario y cantidad validar etc
-
-        //add ProductosXPedido
+            _context.ProductosXPedido.AddRange(productosAgregar);
+            await _context.SaveChangesAsync();
+            return new PedidosDto();
+        }
 
 
 
-        //al agregar un pedido modificamos tanto pedido como productos por pedido estado = 1
-        //validamos si existe stock
-        // validamos el precio al multiplicar la cantidad x valor unitario
-        //el valor en productos x pedido sera cantidad por valor unitario x cada producto agregado en un foreach?
-        //insercion a pedido y productosXpedido
+        public decimal ValorTotalPedido(List<ProductosCantidadDto> productos)
+        {
+            if (productos == null || !productos.Any()) return 0;
+
+            //de forma declarativa podemos pasar todo de una vez, de forma declarativa podriamos validar si esta pidiendo mas stock del que hay
+            //var idsBusqueda = productos.Select(p => p.IdProducto).ToList();
+
+            //var productosDb = _context.Productos
+            //.Where(p => idsBusqueda.Contains(p.Id))
+            //.ToList();
+
+            //return productosDb.Sum(pDb =>
+            //pDb.ValorUnitario * productos.First(pDto => pDto.IdProducto == pDb.Id).Cantidad
+            //);
+            decimal totalPedido = 0;
+            foreach (var producto in productos)
+            {
+                var productoDb = _context.Productos.FirstOrDefault(p => p.Id == producto.IdProducto);
+                if (productoDb != null)
+                {
+                    if (productoDb.Cantidad < producto.Cantidad) throw new Exception("cantidad supera el stock disponible");
+                    totalPedido += (productoDb.ValorUnitario * producto.Cantidad);
+                }
+                else throw new Exception("producto inexistente");
+            }
+            return totalPedido;
         }
 
 
 
 
+        public async void Stock(PedidosCreacionDto PedidoCreacion) 
+        {
+            //var hayProductos = PedidoCreacion.Productos.Select(p => p.Id).ToList();
+            ////var hayProductos = _context.Productos.Where(x => x.Cantidad <= PedidoCreacion.Producto);
 
+            //var productosDb =await _context.Productos.Where(p => hayProductos.Contains(p.Id)).ToListAsync();
 
+            //var sinStock = PedidoCreacion.Productos.Where(p => productosDb.Any(db => db.Id == p.Id && db.Cantidad < p.Cantidad)).ToList();
 
-
+            //if (sinStock.Any())
+            //{
+                throw new Exception("Algunos productos no tienen stock suficiente.");
+            //}
+        }
     }
 }

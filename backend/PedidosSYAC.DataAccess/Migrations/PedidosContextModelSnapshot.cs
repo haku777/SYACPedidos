@@ -33,8 +33,9 @@ namespace PedidosSYAC.DataAccess.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("Identificacion")
-                        .HasColumnType("int");
+                    b.Property<string>("Identificacion")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Nombre")
                         .IsRequired()
@@ -43,6 +44,15 @@ namespace PedidosSYAC.DataAccess.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Clientes");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Direccion = "DirSYAC",
+                            Identificacion = "1230000007",
+                            Nombre = "Jimmy"
+                        });
                 });
 
             modelBuilder.Entity("PedidosSYAC.DataAccess.Entity.Estados", b =>
@@ -93,8 +103,8 @@ namespace PedidosSYAC.DataAccess.Migrations
                     b.Property<int>("Id_Estado")
                         .HasColumnType("int");
 
-                    b.Property<int>("ValorTotal")
-                        .HasColumnType("int");
+                    b.Property<decimal>("ValorTotal")
+                        .HasColumnType("decimal(18,2)");
 
                     b.HasKey("Id");
 
@@ -103,6 +113,15 @@ namespace PedidosSYAC.DataAccess.Migrations
                     b.HasIndex("Id_Estado");
 
                     b.ToTable("Pedidos");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Id_Cliente = 1,
+                            Id_Estado = 1,
+                            ValorTotal = 210m
+                        });
                 });
 
             modelBuilder.Entity("PedidosSYAC.DataAccess.Entity.Productos", b =>
@@ -120,12 +139,29 @@ namespace PedidosSYAC.DataAccess.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("ValorUnitario")
-                        .HasColumnType("int");
+                    b.Property<decimal>("ValorUnitario")
+                        .HasPrecision(18, 2)
+                        .HasColumnType("decimal(18,2)");
 
                     b.HasKey("Id");
 
-                    b.ToTable("Productos", (string)null);
+                    b.ToTable("Productos");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Cantidad = 25,
+                            Nombre = "Magnat",
+                            ValorUnitario = 50m
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Cantidad = 25,
+                            Nombre = "Code Noir",
+                            ValorUnitario = 60m
+                        });
                 });
 
             modelBuilder.Entity("PedidosSYAC.DataAccess.Entity.ProductosXPedido", b =>
@@ -145,8 +181,9 @@ namespace PedidosSYAC.DataAccess.Migrations
                     b.Property<int>("Id_Producto")
                         .HasColumnType("int");
 
-                    b.Property<int>("ValorPorCantidad")
-                        .HasColumnType("int");
+                    b.Property<decimal>("ValorPorCantidad")
+                        .HasPrecision(18, 2)
+                        .HasColumnType("decimal(18,2)");
 
                     b.HasKey("Id");
 
@@ -155,6 +192,24 @@ namespace PedidosSYAC.DataAccess.Migrations
                     b.HasIndex("Id_Producto");
 
                     b.ToTable("ProductosXPedido");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Cantidad = 2,
+                            Id_Pedido = 1,
+                            Id_Producto = 1,
+                            ValorPorCantidad = 100m
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Cantidad = 1,
+                            Id_Pedido = 1,
+                            Id_Producto = 2,
+                            ValorPorCantidad = 60m
+                        });
                 });
 
             modelBuilder.Entity("PedidosSYAC.DataAccess.Entity.Pedidos", b =>

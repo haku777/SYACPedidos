@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using Microsoft.EntityFrameworkCore;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace PedidosSYAC.DataAccess.Entity
 {
@@ -13,11 +9,14 @@ namespace PedidosSYAC.DataAccess.Entity
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
+        public int Id_Pedido { get; set; }
         [ForeignKey("Id_Pedido")]
-        public Pedidos Pedido { get; set; }
+        public virtual Pedidos Pedido { get; set; }
+        public int Id_Producto { get; set; }
         [ForeignKey("Id_Producto")]
-        public Productos Producto { get; set; }
+        public virtual Productos Producto { get; set; }
         public int Cantidad { get; set; }
-        public int ValorPorCantidad { get; set; }
+        [Precision(18, 2)]
+        public decimal ValorPorCantidad { get; set; }
     }
 }

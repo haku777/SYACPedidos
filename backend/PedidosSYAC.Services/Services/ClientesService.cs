@@ -31,7 +31,7 @@ namespace PedidosSYAC.Services.Services
         }
 
 
-        public async Task<ClientesDto> GetByIdentificacion(int Identificacion)
+        public async Task<ClientesDto> GetByIdentificacion(string Identificacion)
         {
             var autor = await _context.Clientes.FirstOrDefaultAsync(a=>a.Identificacion == Identificacion);
             ClientesDto mapAutor = _mapper.Map<ClientesDto>(autor);
@@ -61,7 +61,7 @@ namespace PedidosSYAC.Services.Services
         }
 
 
-        public async Task<int> DeleteClienteAsync(int identification) 
+        public async Task<int> DeleteClienteAsync(string identification) 
         {
             return await _context.Clientes.Where(a=>a.Identificacion == identification).ExecuteDeleteAsync();
         }

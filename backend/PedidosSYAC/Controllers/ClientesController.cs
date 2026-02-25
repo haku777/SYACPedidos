@@ -26,9 +26,9 @@ namespace PedidosSYAC.Controllers
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public async Task<ActionResult<ClientesDto>> GetClienteByIdentificacion(int Identificacion)
+        public async Task<ActionResult<ClientesDto>> GetClienteByIdentificacion(string Identificacion)
         {
-            if (Identificacion <= 0)
+            if (string.IsNullOrEmpty(Identificacion))
                 return NotFound();
 
             var result = await _cliente.GetByIdentificacion(Identificacion);
@@ -85,9 +85,9 @@ namespace PedidosSYAC.Controllers
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public async Task<IActionResult> DeleteCliente(int Identificacion)
+        public async Task<IActionResult> DeleteCliente(string Identificacion)
         {
-            if (Identificacion <= 0)
+            if (string.IsNullOrEmpty(Identificacion))
                 return BadRequest();
 
             int eliminado = await _cliente.DeleteClienteAsync(Identificacion);

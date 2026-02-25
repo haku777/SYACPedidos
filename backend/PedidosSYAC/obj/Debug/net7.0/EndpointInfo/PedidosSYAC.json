@@ -55,8 +55,7 @@
             "required": true,
             "style": "simple",
             "schema": {
-              "type": "integer",
-              "format": "int32"
+              "type": "string"
             }
           }
         ],
@@ -278,8 +277,7 @@
             "required": true,
             "style": "simple",
             "schema": {
-              "type": "integer",
-              "format": "int32"
+              "type": "string"
             }
           }
         ],
@@ -453,17 +451,17 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/PedidosDto"
+                "$ref": "#/components/schemas/PedidosCreacionDto"
               }
             },
             "text/json": {
               "schema": {
-                "$ref": "#/components/schemas/PedidosDto"
+                "$ref": "#/components/schemas/PedidosCreacionDto"
               }
             },
             "application/*+json": {
               "schema": {
-                "$ref": "#/components/schemas/PedidosDto"
+                "$ref": "#/components/schemas/PedidosCreacionDto"
               }
             }
           }
@@ -741,8 +739,8 @@
         "type": "object",
         "properties": {
           "identificacion": {
-            "type": "integer",
-            "format": "int32"
+            "minLength": 1,
+            "type": "string"
           },
           "nombre": {
             "type": "string",
@@ -759,10 +757,8 @@
         "type": "object",
         "properties": {
           "identificacion": {
-            "maximum": 2000000000,
-            "minimum": 100000000,
-            "type": "integer",
-            "format": "int32"
+            "type": "string",
+            "nullable": true
           },
           "nombre": {
             "type": "string",
@@ -830,6 +826,23 @@
         "properties": {
           "estado": {
             "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "PedidosCreacionDto": {
+        "type": "object",
+        "properties": {
+          "indentificacionCliente": {
+            "type": "string",
+            "nullable": true
+          },
+          "listaIdProductos": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ProductosCantidadDto"
+            },
             "nullable": true
           }
         },
@@ -945,6 +958,20 @@
             "format": "int32"
           },
           "valorUnitario": {
+            "type": "number",
+            "format": "double"
+          }
+        },
+        "additionalProperties": false
+      },
+      "ProductosCantidadDto": {
+        "type": "object",
+        "properties": {
+          "idProducto": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "cantidad": {
             "type": "integer",
             "format": "int32"
           }

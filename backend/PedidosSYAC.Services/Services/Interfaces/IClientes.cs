@@ -7,10 +7,10 @@ namespace PedidosSYAC.Services.Services.Interfaces
     public interface IClientes
     {
         Task<List<ClientesDto>> Get();
-        Task<ClientesDto> GetByIdentificacion(int Identificacion);
+        Task<ClientesDto> GetByIdentificacion(string Identificacion);
         Task UpdateCliente(ClientesActualizarDto Cliente);
         Task<ClientesDto> AddCliente(ClientesCreacionDto Cliente);
-        Task<int> DeleteClienteAsync(int identification);
+        Task<int> DeleteClienteAsync(string identification);
     }
 
 }
