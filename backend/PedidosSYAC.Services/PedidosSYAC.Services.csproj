@@ -10,15 +10,12 @@
     <PackageReference Include="AutoMapper" Version="12.0.1" />
     <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="12.0.1" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc.Core" Version="2.2.5" />
+    <PackageReference Include="RavenDB.Client" Version="7.2.0" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\PedidosSYAC.Common\PedidosSYAC.Common.csproj" />
     <ProjectReference Include="..\PedidosSYAC.DataAccess\PedidosSYAC.DataAccess.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Services\Utilities\" />
   </ItemGroup>
 
 </Project>

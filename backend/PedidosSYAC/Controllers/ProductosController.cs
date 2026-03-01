@@ -1,9 +1,9 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
-using PedidosSYAC.Services.Interfaces;
-using PedidosSYAC.Services.Services.Interfaces;
-using PedidosSYAC.Common.Dto.Clientes;
+using Microsoft.IdentityModel.Tokens;
+using PedidosSYAC.Common.Constants;
 using PedidosSYAC.Common.Dto.Productos;
+using PedidosSYAC.Services.Interfaces;
 
 namespace PedidosSYAC.Controllers
 {
@@ -49,7 +49,7 @@ namespace PedidosSYAC.Controllers
             var result = await _producto.GetByName(nombreProducto);
 
             if (result == null)
-                return NotFound(new {message ="Pedido no encontrado"});
+                return NotFound(Messages.notfoundProducto);
 
             return Ok(result);
         }
@@ -74,8 +74,8 @@ namespace PedidosSYAC.Controllers
             if (producto == null)
                 return BadRequest(producto);
 
-            var newBook = await _producto.AddProducto(producto);
-            return newBook;
+            var productoAgregado = await _producto.AddProducto(producto);
+            return productoAgregado;
         }
 
 
@@ -88,33 +88,33 @@ namespace PedidosSYAC.Controllers
             if (producto == null)
                 return BadRequest();
 
-            var findProducto = await _producto.GetByName(producto.Nombre);
+            var findProducto = await _producto.GetById(producto.Id);
             if (findProducto == null) { 
-                ModelState.AddModelError("ProductoNoValido","El Producto no existe");
+                //otra forma de enviar posibles errores para pruebas, en lugar del middleware
+                ModelState.AddModelError("ProductoNoValido",Messages.notfoundProducto);
                 return BadRequest(ModelState);
             }
 
             await _producto.UpdateProducto(producto);
-            return Ok(new { message = "Producto actualizado!"});
+            return Ok(Messages.updatedProducto);
         }
 
-        [HttpDelete]
-        [Route("DeleteProducto/{nombreProducto}")]
+        [HttpDelete("DeleteProducto/{IdProducto}")]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public async Task<IActionResult> DeleteProducto(string nombreProducto)
+        public async Task<IActionResult> DeleteProducto(int IdProducto)
         {
-            if (string.IsNullOrEmpty(nombreProducto))
+            if (IdProducto==0)
                 return BadRequest();
 
-            var producto = await _producto.GetByName(nombreProducto);
+            var producto = await _producto.GetById(IdProducto);
             if (producto == null)
                 return NotFound();
 
             _producto.DeleteProducto(producto);
 
-            return NoContent();
+            return Ok(Messages.deleteProducto);
         }
     }
 }

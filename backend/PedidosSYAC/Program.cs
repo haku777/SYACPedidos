@@ -3,6 +3,7 @@ using PedidosSYAC.Services.Interfaces;
 using PedidosSYAC.DataAccess;
 using PedidosSYAC.Services.Services;
 using PedidosSYAC.Services.Services.Interfaces;
+using PedidosSYAC.Services.Services.Utilities;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -22,6 +23,7 @@ builder.Services.AddScoped<IEstados, EstadosService>();
 builder.Services.AddScoped<IPedidos, PedidosService>();
 
 var app = builder.Build();
+app.UseMiddleware<ErrorHandlerMiddleware>();
 
 using (var scope = app.Services.CreateScope())
 {
@@ -34,6 +36,7 @@ if (app.Environment.IsDevelopment())
         app.UseSwagger();
         app.UseSwaggerUI();
     }
+
 
 app.UseHttpsRedirection();
 app.UseAuthorization();

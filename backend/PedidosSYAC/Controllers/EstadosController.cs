@@ -5,7 +5,7 @@ using PedidosSYAC.Services.Services.Interfaces;
 namespace PedidosSYAC.Controllers
 {
     [ApiController]
-    public class EstadosController : Controller
+    public class EstadosController : ControllerBase
     {
         private readonly IEstados _estados;
         public EstadosController(IEstados estados) { _estados = estados; }

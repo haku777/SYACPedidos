@@ -4,7 +4,7 @@ using PedidosSYAC.Services.Services.Interfaces;
 
 namespace PedidosSYAC.Controllers
 {
-    public class PedidosController : Controller
+    public class PedidosController : ControllerBase
     {
         private readonly IPedidos _pedidos;
         public PedidosController(IPedidos pedidos) { _pedidos = pedidos; }
@@ -15,6 +15,14 @@ namespace PedidosSYAC.Controllers
         {
             var pedidos = await _pedidos.Get();
             return pedidos;
+        }
+
+        [HttpGet("GetPedidosPorCliente/{IdentificacionCliente}")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        public async Task<List<PedidosDto>> GetPedidosById(string IdentificacionCliente) 
+        {
+            return await _pedidos.GetByIdCliente(IdentificacionCliente);
         }
 
         [HttpPost]

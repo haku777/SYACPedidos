@@ -11,7 +11,7 @@ using PedidosSYAC.DataAccess;
 namespace PedidosSYAC.DataAccess.Migrations
 {
     [DbContext(typeof(PedidosContext))]
-    [Migration("20260225134858_inicial")]
+    [Migration("20260301220802_inicial")]
     partial class inicial
     {
         /// <inheritdoc />

@@ -10,6 +10,7 @@ namespace PedidosSYAC.Services.Services.Interfaces
     public interface IPedidos
     {
         Task<List<PedidosDto>> Get();
+        Task<List<PedidosDto>> GetByIdCliente(string IdCliente);
         Task<PedidosDto> AddPedido(PedidosCreacionDto PedidoCreacion);
     }
 }

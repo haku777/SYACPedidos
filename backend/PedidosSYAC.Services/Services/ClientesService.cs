@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 using AutoMapper.QueryableExtensions;
-using Microsoft.AspNetCore.Mvc;
+using PedidosSYAC.Common.Constants;
 using Microsoft.EntityFrameworkCore;
 using PedidosSYAC.Common.Dto.Clientes;
 using PedidosSYAC.DataAccess;
@@ -40,22 +40,24 @@ namespace PedidosSYAC.Services.Services
 
         public async Task<ClientesDto> AddCliente(ClientesCreacionDto cliente)
         {
-            var nuevoCliente = _mapper.Map<Clientes>(cliente);
             var existeCliente = await GetByIdentificacion(cliente.Identificacion);
-            if (existeCliente!=null) throw new Exception("cliente existente");
-            var result = await _context.Clientes.AddAsync(nuevoCliente);
+
+            if (existeCliente != null) throw new Exception(Messages.existCliente);
+
+            var nuevoClienteMapeado = _mapper.Map<Clientes>(cliente);
+            var result = await _context.Clientes.AddAsync(nuevoClienteMapeado);
             await _context.SaveChangesAsync();
-            ClientesDto newBookAdded = await GetByIdentificacion(result.Entity.Identificacion);
-            return newBookAdded;
+            ClientesDto nuevoCliente = await GetByIdentificacion(result.Entity.Identificacion);
+            return nuevoCliente;
         }
   
         public async Task UpdateCliente(ClientesActualizarDto cliente)
         {
-            var xd = _context.Clientes.FirstOrDefault(a=>a.Identificacion == cliente.Identificacion);
-            if (xd != null) {
-                xd.Identificacion= cliente.Identificacion;
-                xd.Nombre= cliente.Nombre;
-                xd.Direccion= cliente.Direccion;
+            var updateCliente = _context.Clientes.FirstOrDefault(a=>a.Identificacion == cliente.Identificacion);
+            if (updateCliente != null) {
+                updateCliente.Identificacion= cliente.Identificacion;
+                updateCliente.Nombre= cliente.Nombre;
+                updateCliente.Direccion= cliente.Direccion;
                 await _context.SaveChangesAsync();
             }
         }

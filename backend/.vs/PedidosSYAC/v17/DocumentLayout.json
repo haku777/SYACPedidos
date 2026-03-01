@@ -3,10 +3,6 @@
   "WorkspaceRootPath": "G:\\Archivos\\HAKU777\\NET\\SYACPedidos\\SYACPedidos\\backend\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{A8EA1DBB-C3B8-B347-3925-4904DC065099}|PedidosSYAC.Services\\PedidosSYAC.Services.csproj|g:\\archivos\\haku777\\net\\syacpedidos\\syacpedidos\\backend\\pedidossyac.services\\services\\pedidosservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A8EA1DBB-C3B8-B347-3925-4904DC065099}|PedidosSYAC.Services\\PedidosSYAC.Services.csproj|solutionrelative:pedidossyac.services\\services\\pedidosservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{764510DD-D58D-84FB-B5D9-5DFBE27E8A20}|PedidosSYAC\\PedidosSYAC.csproj|g:\\archivos\\haku777\\net\\syacpedidos\\syacpedidos\\backend\\pedidossyac\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{764510DD-D58D-84FB-B5D9-5DFBE27E8A20}|PedidosSYAC\\PedidosSYAC.csproj|solutionrelative:pedidossyac\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
@@ -18,17 +14,17 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 20,
+          "SelectedChildIndex": 0,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 0,
               "Title": "Program.cs",
               "DocumentMoniker": "G:\\Archivos\\HAKU777\\NET\\SYACPedidos\\SYACPedidos\\backend\\PedidosSYAC\\Program.cs",
               "RelativeDocumentMoniker": "PedidosSYAC\\Program.cs",
               "ToolTip": "G:\\Archivos\\HAKU777\\NET\\SYACPedidos\\SYACPedidos\\backend\\PedidosSYAC\\Program.cs",
               "RelativeToolTip": "PedidosSYAC\\Program.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA8AAABSAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAArAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2026-02-08T22:37:13.318Z",
               "IsPinned": true,
@@ -109,19 +105,6 @@
             {
               "$type": "Bookmark",
               "Name": "ST:131:0:{116d2292-e37d-41cd-a077-ebacac4c8cc4}"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "PedidosService.cs",
-              "DocumentMoniker": "G:\\Archivos\\HAKU777\\NET\\SYACPedidos\\SYACPedidos\\backend\\PedidosSYAC.Services\\Services\\PedidosService.cs",
-              "RelativeDocumentMoniker": "PedidosSYAC.Services\\Services\\PedidosService.cs",
-              "ToolTip": "G:\\Archivos\\HAKU777\\NET\\SYACPedidos\\SYACPedidos\\backend\\PedidosSYAC.Services\\Services\\PedidosService.cs",
-              "RelativeToolTip": "PedidosSYAC.Services\\Services\\PedidosService.cs",
-              "ViewState": "AgIAAC8AAAAAAAAAAAAEwEcAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-02-25T13:47:55.675Z",
-              "EditorCaption": ""
             }
           ]
         },

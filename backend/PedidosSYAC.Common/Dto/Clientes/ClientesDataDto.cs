@@ -8,7 +8,7 @@ namespace PedidosSYAC.Common.Dto.Clientes
 {
     public class ClientesDataDto
     {
-        public int identificacion { get; set; }
+        public string identificacion { get; set; }
         public string nombre { get; set; }
     }
 }

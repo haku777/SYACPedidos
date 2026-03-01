@@ -12,5 +12,4 @@ namespace PedidosSYAC.Services.Services.Interfaces
         Task<ClientesDto> AddCliente(ClientesCreacionDto Cliente);
         Task<int> DeleteClienteAsync(string identification);
     }
-
 }

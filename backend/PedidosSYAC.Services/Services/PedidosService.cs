@@ -30,6 +30,11 @@ namespace PedidosSYAC.Services.Services
             return listaPedidos;
         }
 
+        public async Task<List<PedidosDto>> GetByIdCliente(string IdCliente) 
+        {
+            return await _context.Pedidos.ProjectTo<PedidosDto>(_mapper.ConfigurationProvider).Where(p=>p.Cliente.identificacion == IdCliente).ToListAsync();
+        }
+
         public async Task<PedidosDto> AddPedido(PedidosCreacionDto PedidoCreacion) 
         {
             //validacion de stock mediante front en el producto a seleccionar

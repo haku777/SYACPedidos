@@ -43,17 +43,16 @@
         }
       }
     },
-    "/api/Clientes/GetClienteByIdentificacion/{identificacion}": {
+    "/api/Clientes/GetClienteByIdentificacion": {
       "get": {
         "tags": [
           "Clientes"
         ],
         "parameters": [
           {
-            "name": "Identificacion",
-            "in": "path",
-            "required": true,
-            "style": "simple",
+            "name": "identificacion",
+            "in": "query",
+            "style": "form",
             "schema": {
               "type": "string"
             }
@@ -442,6 +441,58 @@
         }
       }
     },
+    "/GetPedidosPorCliente/{IdentificacionCliente}": {
+      "get": {
+        "tags": [
+          "Pedidos"
+        ],
+        "parameters": [
+          {
+            "name": "IdentificacionCliente",
+            "in": "path",
+            "required": true,
+            "style": "simple",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/PedidosDto"
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/PedidosDto"
+                  }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/PedidosDto"
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
     "/AddPedido": {
       "post": {
         "tags": [
@@ -666,19 +717,20 @@
         }
       }
     },
-    "/api/Productos/DeleteProducto/{nombreProducto}": {
+    "/api/Productos/DeleteProducto/{IdProducto}": {
       "delete": {
         "tags": [
           "Productos"
         ],
         "parameters": [
           {
-            "name": "nombreProducto",
+            "name": "IdProducto",
             "in": "path",
             "required": true,
             "style": "simple",
             "schema": {
-              "type": "string"
+              "type": "integer",
+              "format": "int32"
             }
           }
         ],
@@ -775,8 +827,8 @@
         "type": "object",
         "properties": {
           "identificacion": {
-            "type": "integer",
-            "format": "int32"
+            "type": "string",
+            "nullable": true
           },
           "nombre": {
             "type": "string",
@@ -793,8 +845,8 @@
             "format": "int32"
           },
           "identificacion": {
-            "type": "integer",
-            "format": "int32"
+            "type": "string",
+            "nullable": true
           },
           "nombre": {
             "type": "string",
@@ -862,8 +914,8 @@
             "$ref": "#/components/schemas/EstadosDto"
           },
           "valorTotal": {
-            "type": "integer",
-            "format": "int32"
+            "type": "number",
+            "format": "double"
           }
         },
         "additionalProperties": false
@@ -897,21 +949,25 @@
       },
       "ProductoActualizacionDto": {
         "required": [
-          "nombre"
+          "id"
         ],
         "type": "object",
         "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
           "nombre": {
-            "minLength": 1,
-            "type": "string"
+            "type": "string",
+            "nullable": true
           },
           "cantidad": {
             "type": "integer",
             "format": "int32"
           },
           "valorUnitario": {
-            "type": "integer",
-            "format": "int32"
+            "type": "number",
+            "format": "double"
           }
         },
         "additionalProperties": false
@@ -932,16 +988,13 @@
             "format": "int32"
           },
           "valorUnitario": {
-            "type": "integer",
-            "format": "int32"
+            "type": "number",
+            "format": "double"
           }
         },
         "additionalProperties": false
       },
       "ProductoDto": {
-        "required": [
-          "nombre"
-        ],
         "type": "object",
         "properties": {
           "id": {
@@ -950,8 +1003,8 @@
           },
           "nombre": {
             "maxLength": 50,
-            "minLength": 1,
-            "type": "string"
+            "type": "string",
+            "nullable": true
           },
           "cantidad": {
             "type": "integer",

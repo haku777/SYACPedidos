@@ -14,6 +14,6 @@ namespace PedidosSYAC.Common.Dto.Productos
         [MaxLength(50)]
         public string Nombre { get; set; }
         public int Cantidad { get; set; }
-        public int ValorUnitario { get; set; }
+        public decimal ValorUnitario { get; set; }
     }
 }

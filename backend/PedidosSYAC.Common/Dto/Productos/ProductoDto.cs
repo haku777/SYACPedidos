@@ -11,7 +11,6 @@ namespace PedidosSYAC.Common.Dto.Productos
     public class ProductoDto
     {
         public int Id { get; set; }
-        [Required]
         [MaxLength(50)]
         public string Nombre { get; set; }
         public int Cantidad { get; set; }

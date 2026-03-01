@@ -14,6 +14,6 @@ namespace PedidosSYAC.Common.Dto.Pedidos
         //son necesarios nuevos dto aparte para cargar datos no sensibles y agregarlos al mapper con la entidad correspondiente
         public virtual ClientesDataDto Cliente { get; set; }
         public virtual EstadosDto Estado { get; set; }
-        public int ValorTotal { get; set; }
+        public decimal ValorTotal { get; set; }
     }
 }

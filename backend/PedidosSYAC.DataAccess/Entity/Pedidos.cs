@@ -16,6 +16,7 @@ namespace PedidosSYAC.DataAccess.Entity
         public int Id_Estado { get; set; }
         [ForeignKey("Id_Estado")]
         public virtual Estados Estado { get; set; }
+        [Column(TypeName = "decimal(18,2)")]
         public decimal ValorTotal { get; set; }
 
     }

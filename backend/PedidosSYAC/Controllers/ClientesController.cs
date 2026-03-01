@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using PedidosSYAC.Common.Constants;
 using PedidosSYAC.Common.Dto.Clientes;
 using PedidosSYAC.Services.Services.Interfaces;
 
@@ -22,16 +23,16 @@ namespace PedidosSYAC.Controllers
         }
 
         [HttpGet]
-        [Route("GetClienteByIdentificacion/{identificacion}")]
+        [Route("GetClienteByIdentificacion")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public async Task<ActionResult<ClientesDto>> GetClienteByIdentificacion(string Identificacion)
+        public async Task<ActionResult<ClientesDto>> GetClienteByIdentificacion(string identificacion)
         {
-            if (string.IsNullOrEmpty(Identificacion))
+            if (string.IsNullOrEmpty(identificacion))
                 return NotFound();
 
-            var result = await _cliente.GetByIdentificacion(Identificacion);
+            var result = await _cliente.GetByIdentificacion(identificacion);
 
             if (result == null)
                 return NotFound();
@@ -76,12 +77,11 @@ namespace PedidosSYAC.Controllers
 
             await _cliente.UpdateCliente(cliente);
 
-            return NoContent();
+            return Ok(Messages.updatedCliente);
         }
 
 
-        [HttpDelete]
-        [Route("DeleteCliente/{Identificacion}")]
+        [HttpDelete("DeleteCliente/{Identificacion}")]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
@@ -92,9 +92,9 @@ namespace PedidosSYAC.Controllers
 
             int eliminado = await _cliente.DeleteClienteAsync(Identificacion);
             if (eliminado == 0)
-                return NotFound();
+                return NotFound(Messages.notfoundCliente);
 
-            return Ok(new { message = "Cliente eliminado correctamente"});
+            return Ok(Messages.deleteCliente);
         }
     }
 }

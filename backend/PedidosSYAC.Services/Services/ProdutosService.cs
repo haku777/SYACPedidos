@@ -1,5 +1,7 @@
 ﻿using AutoMapper;
+using AutoMapper.QueryableExtensions;
 using Microsoft.EntityFrameworkCore;
+using PedidosSYAC.Common.Dto.Clientes;
 using PedidosSYAC.Common.Dto.Productos;
 using PedidosSYAC.DataAccess;
 using PedidosSYAC.DataAccess.Entity;
@@ -28,6 +30,13 @@ namespace PedidosSYAC.Services.Services
             return listaProductos;
         }
 
+        public async Task<ProductoDto> GetById(int IdProducto)
+        {
+            var productoBusqueda = await _context.Productos.ProjectTo<ProductoDto>(_mapper.ConfigurationProvider).Where(p => p.Id == IdProducto).ToListAsync();
+            ProductoDto producto = _mapper.Map<ProductoDto>(productoBusqueda.FirstOrDefault());
+            return producto;
+        }
+
         public async Task<ProductoDto> GetByName(string nombreProducto)
         {
             var productoBusqueda = await _context.Productos.FirstOrDefaultAsync(b => b.Nombre == nombreProducto);
@@ -46,7 +55,7 @@ namespace PedidosSYAC.Services.Services
 
         public async Task UpdateProducto(ProductoActualizacionDto producto)
         {
-            var existsProducto = _context.Productos.FirstOrDefault(b => b.Nombre == producto.Nombre);
+            var existsProducto = _context.Productos.FirstOrDefault(b => b.Id == producto.Id);
             if (existsProducto != null)
             {
                 existsProducto.Nombre = producto.Nombre;

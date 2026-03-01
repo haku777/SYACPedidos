@@ -103,15 +103,15 @@
   {
     "ContainingType": "PedidosSYAC.Controllers.ClientesController",
     "Method": "GetClienteByIdentificacion",
-    "RelativePath": "api/Clientes/GetClienteByIdentificacion/{identificacion}",
+    "RelativePath": "api/Clientes/GetClienteByIdentificacion",
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
     "Parameters": [
       {
-        "Name": "Identificacion",
+        "Name": "identificacion",
         "Type": "System.String",
-        "IsRequired": true
+        "IsRequired": false
       }
     ],
     "ReturnTypes": [
@@ -238,14 +238,14 @@
   {
     "ContainingType": "PedidosSYAC.Controllers.ProductosController",
     "Method": "DeleteProducto",
-    "RelativePath": "api/Productos/DeleteProducto/{nombreProducto}",
+    "RelativePath": "api/Productos/DeleteProducto/{IdProducto}",
     "HttpMethod": "DELETE",
     "IsController": true,
     "Order": 0,
     "Parameters": [
       {
-        "Name": "nombreProducto",
-        "Type": "System.String",
+        "Name": "IdProducto",
+        "Type": "System.Int32",
         "IsRequired": true
       }
     ],
@@ -409,6 +409,37 @@
           "text/json"
         ],
         "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "PedidosSYAC.Controllers.PedidosController",
+    "Method": "GetPedidosById",
+    "RelativePath": "GetPedidosPorCliente/{IdentificacionCliente}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "IdentificacionCliente",
+        "Type": "System.String",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.List\u00601[[PedidosSYAC.Common.Dto.Pedidos.PedidosDto, PedidosSYAC.Common, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      },
+      {
+        "Type": "System.Void",
+        "MediaTypes": [],
+        "StatusCode": 404
       }
     ]
   }
