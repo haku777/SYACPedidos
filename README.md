@@ -1,7 +1,7 @@
 
 # Aplicacion web de pedidos
 
-> codigo **BackeEnd** **C#** **apiREST** para ver y solicitar pedidos de productos por cliente
+> codigo **BackeEnd** **C#** **.NET** **apiREST** para ver y solicitar pedidos de productos por cliente
 ## Se utiliza codigo de proyecto base apiREST, se aplican tecnologias como:
 
 - [x] C# .NET 7
@@ -13,12 +13,11 @@
 - [x] AutoMapper
 - [x] Swagger
 - [x] Entity Framework
-- [ ] Angular V 21
+- [x] Angular V 21
+---
+> :information_source: en curso...
 
-> :information_source: aun fatal agretar la tabla ProductosXPedido y su funcionamiento
-
-> codigo **frontend** Angular (Inconcluso) nota actualizable
-***En proceso...***
+> codigo **frontend** Angular en ***En proceso...***
 
 > codigo **SQL** `tablas (Cliente, Producto, Pedido)`
 > la creacion de las tablas es mediante EF Migrador y SQL backup  :warning: (EF emitio que no puede confiar el el certificado ssl durante la prueba)
@@ -26,23 +25,20 @@
 
 *Cliente*
 - [x] Id, Identificacion, Nombre, Direccion
-
 *Producto*
 - [x] Id , Nombre, Cantidad, ValorUnitario
-
 *Estado*
 - [x] Id , Estado
-
 *Pedido*
 - [x] Id, Id_Cliente, Id_Producto, Id_Estado, ValorTotal
 
-> ### Cambios que se estan realizando posteriores a la prueba:
+> ### Cambios que se estan o se han realizando posteriores a la prueba:
 - [x] Funcionamiento EF 100%
 - [x] Funcionalidad que agrega los **Estados** sin intervencion del usuario
 - [x] Mejora de entidades y relaciones `Tablas adicionales` *Estados*, *ProductosXPedido*
 - [ ] Prioridad (Regla prioridad del pedido con base en el monto total; Baja: <= $500, Media: > $500 y <=1000, Alta: >1000)
 - [ ] Se puede implementar un singleton para los **Estados**
-- [ ] Creacion componentes Angular
+- [x] Creacion componentes Angular
 - [ ] UX/IU Responsive
 
 >### posibles tablas y funciones
@@ -52,7 +48,6 @@
 - [ ] logs
 
 [***Portafolio***](https://haku777.vercel.app)
-
 
 ![Servicios expuesto](img/1.png)
 ![EF base de datos](img/2.png)
@@ -65,3 +60,4 @@
 ![mockup de Shop](img/8.png)
 ![mockup de Productos](img/9.png)
 ![mockup de Pedidos](img/10.png)
+![mockup de Pedidos](img/11.png)

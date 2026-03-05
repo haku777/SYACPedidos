@@ -1,6 +1,7 @@
 /*estilos grobales*/
 :root{
     font-family: "Inter";
+    /* font-family: 'Noto Sans JP'; */
     color-scheme: light dark;
 }
 *{
