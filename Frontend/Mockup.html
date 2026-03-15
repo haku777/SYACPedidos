@@ -15,64 +15,142 @@
             box-sizing: border-box;
         }
          body {
-            background: #fff;
+            color-scheme: auto;
             font-family: "Inter", sans-serif;
             font-size: 2vw;
         }
-            h1 {
-                color: #000;
-                text-align: center;
-                padding: 10vh 0px;
-            }
-            h1 span {
+        h1 {
+            color: #000;
+            text-align: center;
+            display: inline;
+            font-size: 2rem;
+        }
+        h1 span {
+            color: #00ff80;
+        }
+        h1 code {
+            color: crimson;
+        }
+        img {
+            width: 17vw;
+            border-radius: 10%;
+        }
+        a{
+            text-decoration: none;
+            color: #fff;
+            &:hover{
                 color: #00ff80;
             }
-            h1 code {
-                color: crimson;
+        }
+        header{
+            background-color: #ececec;
+            padding: 10px;
+            & nav{
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                flex-direction: row;
+                & a{
+                    color: #000;
+                }
+                & input{
+                    width: 30vw;
+                    padding: 10px;
+                    border: none;
+                    border-radius: 100px;
+                    box-shadow: 9px 9px 16px #a3b1c699,
+                    -9px -9px 16px #ffffff80;
+                }
             }
-            main{
+            & img{
+                border-radius: 100%;
+                width: 42px;
+                height: 42px;
+            }
+        }
+        main{
+            background-color: #fff;
+            display: flex;
+            flex-direction: row;
+            align-content: center;
+            align-items: center;
+            height: 88vh;
+            & >div{
+                display: flex;
+                align-items: center;
+                background-color: #0059ff;
+                height: 100%;
+                width: 20vw;
+                padding: 40px;
                 display: flex;
                 flex-direction: column;
-                align-content: center;
-                align-items: center;
+                gap: 100px;
+                & .options{
+                    display: flex;
+                    flex-direction: column;
+                    gap: 20px;
+                }
             }
-            main div{
-                width: 70%;
+            & section{
+                width: 80vw;
+                height: 100%;
                 display: flex;
+                flex-wrap: wrap;
+                align-items: start;
                 justify-content: center;
-                align-items: center;
-                padding: 40px;
-                gap: 70px;
+                & >div{
+                    & h3{
+                        text-align: center;
+                        color: #252525;
+                    }
+                    & div{
+                        margin: 20px;
+                        border-radius: 100%;
+                        box-shadow: 9px 9px 16px #a3b1c699,
+                        -9px -9px 16px #ffffff80;
+                        width: 10vw;
+                        height: 10vw;
+                    }
+                }
             }
-            .titulos{
-            }
-            .resultados{
-            }
-            footer{
-                margin-top: 20vh;
-                text-align: center;
-            }
+        }
+        footer{
+            text-align: center;
+        }
      </style>
 </head>
 <body>
-    <h1>Shop <span>SYAC</span> <code>CANADA</code></h1>
+    <header>
+        <nav>
+            <h1>Shop <span>SYAC</span> <code>CANADA</code></h1>
+            <div><input type="research"/></div>
+            <div><img src="https://github.com/haku777.png" alt="user"></div>
+            <a href="#">Options</a>
+        </nav>
+    </header>
 
     <main>
-        <div class="titulos">
-            <p>Pedido</p>
-            <p>cliente</p>
-            <p>Estado</p>
-            <p>Valor</p>
-            <p>Editar</p>
+        <div class="dashboard">
+            <img src="https://haku777.vercel.app/files/img/utilities/tr.png" alt="">
+            <div class="options">
+                <a href="">Clientes</a>
+                <a href="" style="color: #00ff80;">Productos</a>
+                <a href="">Inventario</a>
+                <a href="">Metricas</a>
+                <a href="">Contacto</a>
+            </div>
         </div>
-        <div class="resultados">
-            <p>25</p>
-            <p>Jimmy</p>
-            <p style="color: #00ff80;">Confirmado</p>
-            <p>$40</p>
-            <p style="color: dodgerblue;">Ver</p>
-        </div>
+        <section>
+            <div>
+                <div></div>
+                <h3>Pedios</h3>
+            </div>
+            <div>
+                <div></div>
+                <h3>Carrito</h3>
+            </div>
+        </section>        
     </main>
-    <footer><h2 style="color: teal">proxima edicion <span style="color: crimson">14/02/2026</span></h2></footer>
+    <footer><h2 style="background-color: teal;color: #fff">proxima edicion <span style="color: cyan">15/03/2026</span></h2></footer>
 </body>
 </html>

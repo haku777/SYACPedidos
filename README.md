@@ -25,10 +25,13 @@
 
 *Cliente*
 - [x] Id, Identificacion, Nombre, Direccion
+
 *Producto*
 - [x] Id , Nombre, Cantidad, ValorUnitario
+
 *Estado*
 - [x] Id , Estado
+
 *Pedido*
 - [x] Id, Id_Cliente, Id_Producto, Id_Estado, ValorTotal
 
@@ -53,11 +56,4 @@
 ![EF base de datos](img/2.png)
 ![Angular en proceso](img/3.png)
 ![Servicio cliente agregar](img/4.png)
-![servicio cliente agregar base datos](img/4.1.png)
-![Tabla estados sin intervencion](img/5.png)
-![Validacion servicio estados](img/6.png)
-![mockup de tablas](img/7.png)
-![mockup de Shop](img/8.png)
-![mockup de Productos](img/9.png)
-![mockup de Pedidos](img/10.png)
-![mockup de Pedidos](img/11.png)
+![servicio cliente agregar base datos](img/5.png)
