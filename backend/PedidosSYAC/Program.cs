@@ -22,7 +22,22 @@ builder.Services.AddScoped<IClientes, ClientesService>();
 builder.Services.AddScoped<IEstados, EstadosService>();
 builder.Services.AddScoped<IPedidos, PedidosService>();
 
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AngularApp", policy =>
+    {
+        policy.WithOrigins("http://localhost:4200")
+              .AllowAnyHeader()
+              .AllowAnyMethod();
+    });
+});
+
+
+
 var app = builder.Build();
+
+app.UseCors("AngularApp");
+
 app.UseMiddleware<ErrorHandlerMiddleware>();
 
 using (var scope = app.Services.CreateScope())

@@ -1,14 +1,119 @@
 /*css del componente*/
 
-h1{
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    overflow: hidden;
+}
+    body {
+    color-scheme: auto;
+    font-family: "Inter", sans-serif;
+    font-size: 2vw;
+}
+h1 {
+    color: #000;
+    text-align: center;
+    display: inline;
+    font-size: 2rem;
+}
+h1 span {
+    color: #0099ff;
+}
+h1 code {
+    color: crimson;
+}
+img {
+    width: 10vw;
+    border-radius: 10%;
+}
+a{
+    text-decoration: none;
+    color: #fff;
+    &:hover{
+        color: #00ff80;
+    }
+}
+header{
+    background-color: #ececec;
+    padding: 10px;
+    & nav{
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        flex-direction: row;
+        & a{
+            color: #000;
+        }
+        & input{
+            width: 30vw;
+            padding: 10px;
+            border: none;
+            border-radius: 100px;
+            box-shadow: 9px 9px 16px #a3b1c699,
+            -9px -9px 16px #ffffff80;
+        }
+    }
+    & img{
+        border-radius: 100%;
+        width: 42px;
+        height: 42px;
+    }
+}
+main{
+    background-color: #fff;
     display: flex;
     flex-direction: row;
-    justify-content: center;
-    gap: 30px;
+    align-content: center;
+    align-items: center;
+    height: 88vh;
+    & >div{
+        display: flex;
+        align-items: center;
+        background-color: #0059ff;
+        height: 100%;
+        width: 20vw;
+        padding: 40px;
+        display: flex;
+        flex-direction: column;
+        gap: 100px;
+        & .options{
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+    }
+    & section{
+        width: 80vw;
+        margin-top: 10vh;
+        height: 100%;
+        display: flex;
+        flex-wrap: wrap;
+        align-items: start;
+        justify-content: center;
+        & >div{
+            & h3{
+                text-align: center;
+                color: #252525;
+            }
+            & div{
+                margin: 20px;
+                border-radius: 10%;
+                box-shadow: 9px 9px 16px #a3b1c699,
+                -9px -9px 16px #ffffff80;
+                width: 10vw;
+                height: 10vw;
+            }
+        }
+    }
+    & aside{
+        background: salmon;
+        width: 100%;
+        & img {
+            width: 100px;
+        }
+    }
 }
-.company{
-    color: #00ff80;
-}
-.place{
-    color: crimson;
+footer{
+    text-align: center;
 }

@@ -1,12 +1,14 @@
-@if(isLogged){
-    <p>Cliente: {{ userName }}</p>
+@if(1==1){
+    <p>Cliente: </p>
 }@else{
-    OAUTH 2.0, JWT ???
-    <img src="https://github.com/haku777.png" alt="">
+    <p>componente de clientes</p>
+    <p>notes: OAUTH 2.0, JWT</p>
 }
 
 
-
-
-
+@for (cliente of listaClientes; track cliente.id) {
+  <p>{{ cliente.nombre }}</p>
+} @empty {
+  <p>No hay clientes para mostrar :(</p>
+}
 

@@ -12,7 +12,7 @@ export class ServiceClientes {
 
     constructor(private http: HttpClient) {}
 
-    obtenerClientes(): Observable<any[]> {
+    GetClientes(): Observable<any[]> {
       return this.http.get<any[]>(this.apiUrl);
     }
 
